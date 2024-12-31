@@ -12,13 +12,47 @@ code {
     monospace;
 }
 
-.market {
-  margin: auto;
-  width: 50%;
+.market-container {
   text-align: center;
+  justify-content: center;
+  width: fit-content;
   border-style: solid;
+}
+
+.market {
+  /* border-style: solid; */
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  gap: 20px;
+  align-items: center;
+  justify-content: center;
+
+  padding-left: 0;
+}
+
+.grocery {
+  border-style: solid;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  padding: 10px;
+  width: 150px;
+  margin: 10px;
+  text-align: center;
 }
 
 ul {
   list-style-type: none;
+  display: flex;
+  flex-direction: row;
+  padding: 0;
+  margin: 0;
+}
+
+.picture {
+  height: 100px;
+  width: 100px;
 }
