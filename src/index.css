@@ -44,6 +44,15 @@ code {
   text-align: center;
 }
 
+.cart-container {
+  border-style: solid;
+}
+
+.item-price {
+  display: flex;
+  justify-content: space-between;
+}
+
 ul {
   list-style-type: none;
   display: flex;

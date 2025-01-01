@@ -50,6 +50,7 @@ function App() {
   return (
     <div>
       <GroceryStore />
+      <Cart />
     </div>
   );
 }
@@ -89,4 +90,13 @@ function Grocery({ id, name, price, category, inStock, photo }) {
   );
 }
 
+function Cart() {
+  return (
+    <div className="cart-container">
+      <div className="item-price">
+        <p>Item</p> <p>Price</p>
+      </div>
+    </div>
+  );
+}
 export default App;
