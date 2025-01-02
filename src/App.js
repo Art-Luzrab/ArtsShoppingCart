@@ -1,3 +1,4 @@
+import { useState } from "react";
 import apple from "./images/apple.webp";
 import bread from "./images/bread.jpg";
 import eggs from "./images/eggs.webp";
@@ -64,6 +65,7 @@ function GroceryStore() {
       category={item.category}
       inStock={item.inStock}
       photo={item.photo}
+      key={item.id}
     />
   ));
 
@@ -80,13 +82,21 @@ function GroceryStore() {
 }
 
 function Grocery({ id, name, price, category, inStock, photo }) {
+  const [quantity, setQuantity] = useState(0);
+  console.log(quantity);
+
   return (
     <div className="grocery">
       <img className="picture" src={photo} alt={name} />
       <p>{name}</p>
       <p>${price}</p>
       <p>{inStock ? "In Stock" : "Out of Stock"}</p>
-      <input type="number" /> <button>Add To Cart</button>
+      <input
+        type="number"
+        value={quantity}
+        onChange={(e) => setQuantity(Number(e.target.value))}
+      />
+      <button>Add To Cart</button>
     </div>
   );
 }
