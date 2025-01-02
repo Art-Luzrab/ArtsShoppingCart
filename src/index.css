@@ -44,16 +44,16 @@ code {
   text-align: center;
 }
 
-.cart-container {
-  border-style: solid;
-}
-
-.item-price {
+.word-separator {
   display: flex;
   justify-content: space-between;
 }
 
-ul {
+.item-price {
+  border-style: dashed;
+}
+
+.ul-groceries {
   list-style-type: none;
   display: flex;
   flex-direction: row;
@@ -61,7 +61,33 @@ ul {
   margin: 0;
 }
 
+.cart-container {
+  border-style: solid;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  max-width: 100%;
+}
+
+.total {
+  align-self: flex-end;
+  border-style: solid;
+  padding: 10px;
+  font-weight: bold;
+  width: 200px;
+}
+
 .picture {
   height: 100px;
   width: 100px;
+}
+
+.ul-cart-items {
+  border-style: hidden;
+  margin: 0;
+  padding: 5px;
+}
+
+.cart-item {
+  border-style: solid;
 }

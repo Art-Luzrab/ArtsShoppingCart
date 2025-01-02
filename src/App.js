@@ -72,7 +72,7 @@ function GroceryStore() {
       <div className="market-container">
         <h1>Welcome To Arthur's Market</h1>
         <div className="market">
-          <ul>{groceries}</ul>
+          <ul className="ul-groceries">{groceries}</ul>
         </div>
       </div>
     </>
@@ -93,8 +93,28 @@ function Grocery({ id, name, price, category, inStock, photo }) {
 function Cart() {
   return (
     <div className="cart-container">
-      <div className="item-price">
+      <div className="word-separator item-price">
         <p>Item</p> <p>Price</p>
+      </div>
+      <ul className="ul-cart-items">
+        <li className="word-separator cart-item">
+          <p>Bread (1)</p> <p>$2</p>
+        </li>
+        <li className="word-separator cart-item">
+          <p>Milk (2)</p> <p>$6</p>
+        </li>
+      </ul>
+
+      <div className="total">
+        <div className="word-separator">
+          <p>Subtotal:</p> <p>$8.00</p>
+        </div>
+        <div className="word-separator">
+          <p>Tax:</p> <p>$0.80</p>
+        </div>
+        <div className="word-separator">
+          <p>Total:</p> <p>$8.80</p>
+        </div>
       </div>
     </div>
   );
