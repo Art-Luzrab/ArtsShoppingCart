@@ -48,17 +48,15 @@ const market = [
 ];
 
 function App() {
-  const [quantity, setQuantity] = useState(0);
-
   return (
     <div className="App">
-      <GroceryStore quantity={quantity} setQuantity={setQuantity} />
+      <GroceryStore />
       <Cart />
     </div>
   );
 }
 
-function GroceryStore({ quantity, setQuantity }) {
+function GroceryStore() {
   const groceries = market.map((item) => (
     <Grocery
       id={item.id}
@@ -68,8 +66,6 @@ function GroceryStore({ quantity, setQuantity }) {
       inStock={item.inStock}
       photo={item.photo}
       key={item.id}
-      quantity={quantity}
-      setQuantity={setQuantity}
     />
   ));
 
@@ -85,16 +81,8 @@ function GroceryStore({ quantity, setQuantity }) {
   );
 }
 
-function Grocery({
-  id,
-  name,
-  price,
-  category,
-  inStock,
-  photo,
-  quantity,
-  setQuantity,
-}) {
+function Grocery({ id, name, price, category, inStock, photo }) {
+  const [quantity, setQuantity] = useState(0);
   console.log(quantity);
 
   return (
