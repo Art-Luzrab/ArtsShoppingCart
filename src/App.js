@@ -48,7 +48,7 @@ const market = [
 
 function App() {
   return (
-    <div>
+    <div className="App">
       <GroceryStore />
       <Cart />
     </div>
@@ -86,6 +86,7 @@ function Grocery({ id, name, price, category, inStock, photo }) {
       <p>{name}</p>
       <p>${price}</p>
       <p>{inStock ? "In Stock" : "Out of Stock"}</p>
+      <input type="number" /> <button>Add To Cart</button>
     </div>
   );
 }

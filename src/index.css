@@ -19,6 +19,16 @@ code {
   border-style: solid;
 }
 
+.App {
+  display: flex;
+  flex-direction: row;
+}
+
+input {
+  width: 50px;
+  margin-bottom: 5px;
+}
+
 .market {
   /* border-style: solid; */
   display: flex;
