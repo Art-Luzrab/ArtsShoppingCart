@@ -48,25 +48,17 @@ const market = [
 ];
 
 function App() {
-  const [cart, setCart] = useState([]);
   const [quantity, setQuantity] = useState(0);
 
-  function handleAddToCart() {}
   return (
     <div className="App">
-      <GroceryStore />
-      <Cart
-        cart={cart}
-        setCart={setCart}
-        quantity={quantity}
-        setQuantity={setQuantity}
-        handleAddToCart={handleAddToCart}
-      />
+      <GroceryStore quantity={quantity} setQuantity={setQuantity} />
+      <Cart />
     </div>
   );
 }
 
-function GroceryStore() {
+function GroceryStore({ quantity, setQuantity }) {
   const groceries = market.map((item) => (
     <Grocery
       id={item.id}
@@ -76,6 +68,8 @@ function GroceryStore() {
       inStock={item.inStock}
       photo={item.photo}
       key={item.id}
+      quantity={quantity}
+      setQuantity={setQuantity}
     />
   ));
 
@@ -100,7 +94,6 @@ function Grocery({
   photo,
   quantity,
   setQuantity,
-  handleAddToCart,
 }) {
   console.log(quantity);
 
@@ -115,12 +108,12 @@ function Grocery({
         value={quantity}
         onChange={(e) => setQuantity(Number(e.target.value))}
       />
-      <button onClick={handleAddToCart}>Add To Cart</button>
+      <button>Add To Cart</button>
     </div>
   );
 }
 
-function Cart({}) {
+function Cart() {
   return (
     <div className="cart-container">
       <div className="word-separator item-price">
