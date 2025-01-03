@@ -12,6 +12,7 @@ const market = [
     category: "Vegetable",
     inStock: true,
     photo: tomato,
+    amountOrdered: 0,
   },
   {
     id: 2,
@@ -20,6 +21,7 @@ const market = [
     category: "Vegetable",
     inStock: true,
     photo: apple,
+    amountOrdered: 0,
   },
   {
     id: 3,
@@ -28,6 +30,7 @@ const market = [
     category: "Wheat",
     inStock: true,
     photo: bread,
+    amountOrdered: 0,
   },
   {
     id: 4,
@@ -36,6 +39,7 @@ const market = [
     category: "Protein",
     inStock: false,
     photo: eggs,
+    amountOrdered: 0,
   },
   {
     id: 5,
@@ -44,10 +48,12 @@ const market = [
     category: "Dairy",
     inStock: true,
     photo: milk,
+    amountOrdered: 0,
   },
 ];
 
 function App() {
+  const [cart, setCart] = useState([]);
   return (
     <div className="App">
       <GroceryStore />
