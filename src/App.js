@@ -54,15 +54,24 @@ const market = [
 
 function App() {
   const [cart, setCart] = useState([]);
+
+  function handleAddToCart(grocery) {
+    setCart((currCart) => [...currCart, grocery]);
+  }
+
   return (
     <div className="App">
-      <GroceryStore />
+      <GroceryStore
+        handleAddToCart={handleAddToCart}
+        cart={cart}
+        setCart={setCart}
+      />
       <Cart />
     </div>
   );
 }
 
-function GroceryStore() {
+function GroceryStore({ handleAddToCart, cart, setCart }) {
   const groceries = market.map((item) => (
     <Grocery
       id={item.id}
@@ -73,6 +82,9 @@ function GroceryStore() {
       photo={item.photo}
       key={item.id}
       amountOrdered={item.amountOrdered}
+      handleAddToCart={handleAddToCart}
+      cart={cart}
+      setCart={setCart}
     />
   ));
 
@@ -88,9 +100,31 @@ function GroceryStore() {
   );
 }
 
-function Grocery({ id, name, price, category, inStock, photo, amountOrdered }) {
+function Grocery({
+  id,
+  name,
+  price,
+  category,
+  inStock,
+  photo,
+  amountOrdered,
+  handleAddToCart,
+  cart,
+  setCart,
+}) {
   const [quantity, setQuantity] = useState(0);
   console.log(quantity);
+  console.log("SETCART", setCart);
+  console.log("CART", cart);
+
+  const grocery = {
+    id,
+    name,
+    price,
+    category,
+    photo,
+    amountOrdered: quantity, // Include the selected quantity
+  };
 
   return (
     <div className="grocery">
@@ -103,7 +137,7 @@ function Grocery({ id, name, price, category, inStock, photo, amountOrdered }) {
         value={quantity}
         onChange={(e) => setQuantity(Number(e.target.value))}
       />
-      <button>Add To Cart</button>
+      <button onClick={() => handleAddToCart(grocery)}>Add To Cart</button>
     </div>
   );
 }
