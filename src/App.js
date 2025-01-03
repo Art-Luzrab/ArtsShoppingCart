@@ -72,6 +72,7 @@ function GroceryStore() {
       inStock={item.inStock}
       photo={item.photo}
       key={item.id}
+      amountOrdered={item.amountOrdered}
     />
   ));
 
@@ -87,7 +88,7 @@ function GroceryStore() {
   );
 }
 
-function Grocery({ id, name, price, category, inStock, photo }) {
+function Grocery({ id, name, price, category, inStock, photo, amountOrdered }) {
   const [quantity, setQuantity] = useState(0);
   console.log(quantity);
 
