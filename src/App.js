@@ -56,7 +56,35 @@ function App() {
   const [cart, setCart] = useState([]);
 
   function handleAddToCart(grocery) {
-    setCart((currCart) => [...currCart, grocery]);
+    const existingGrocery = cart.find((item) => item.id === grocery.id);
+    if (existingGrocery) {
+      setCart((currCart) =>
+        currCart.id === grocery.id
+          ? {
+              ...currCart,
+              amountOrdered: currCart.amountOrdered + grocery.amountOrdered,
+            }
+          : currCart
+      );
+    } else {
+      setCart((currCart) => [...currCart, grocery]);
+    }
+    // setCart((currCart) => {
+    //   const existingGrocery = cart.find((item) => item.id === grocery.id);
+
+    //   if (existingGrocery) {
+    //     currCart.map((item) =>
+    //       item.id === grocery.id
+    //         ? {
+    //             ...item,
+    //             amountOrdered: item.amountOrdered + grocery.amountOrdered,
+    //           }
+    //         : item
+    //     );
+    //   } else {
+    //     return [...currCart, grocery];
+    //   }
+    // });
   }
 
   return (
@@ -159,7 +187,7 @@ function Cart({ cart }) {
           {cart.map((grocery) => (
             <li className="word-separator cart-item" key={grocery.id}>
               <p>{`${grocery.name} (${grocery.amountOrdered})`}</p>
-              <p>{`$${grocery.price * grocery.amountOrdered}`}</p>
+              <p>{`$${(grocery.price * grocery.amountOrdered).toFixed(2)}`}</p>
             </li>
           ))}
 
