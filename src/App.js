@@ -66,7 +66,7 @@ function App() {
         cart={cart}
         setCart={setCart}
       />
-      <Cart />
+      <Cart cart={cart} />
     </div>
   );
 }
@@ -122,7 +122,6 @@ function Grocery({
     name,
     price,
     category,
-    photo,
     amountOrdered: quantity, // Include the selected quantity
   };
 
@@ -142,33 +141,42 @@ function Grocery({
   );
 }
 
-function Cart() {
+function Cart({ cart }) {
   return (
-    <div className="cart-container">
-      <div className="word-separator item-price">
-        <p>Item</p> <p>Price</p>
-      </div>
-      <ul className="ul-cart-items">
-        <li className="word-separator cart-item">
+    <>
+      <div className="cart-container">
+        <div className="word-separator item-price">
+          <p>Item</p> <p>Price</p>
+        </div>
+        <ul className="ul-cart-items">
+          {cart.map((grocery) => (
+            <li className="word-separator cart-item">
+              <p>{`${grocery.name} (${grocery.amountOrdered})`}</p>
+              <p>{`$${grocery.price * grocery.amountOrdered}`}</p>
+            </li>
+          ))}
+
+          {/* <li className="word-separator cart-item">
           <p>Bread (1)</p> <p>$2</p>
         </li>
         <li className="word-separator cart-item">
           <p>Milk (2)</p> <p>$6</p>
-        </li>
-      </ul>
+        </li> */}
+        </ul>
 
-      <div className="total">
-        <div className="word-separator">
-          <p>Subtotal:</p> <p>$8.00</p>
-        </div>
-        <div className="word-separator">
-          <p>Tax:</p> <p>$0.80</p>
-        </div>
-        <div className="word-separator">
-          <p>Total:</p> <p>$8.80</p>
+        <div className="total">
+          <div className="word-separator">
+            <p>Subtotal:</p> <p>$8.00</p>
+          </div>
+          <div className="word-separator">
+            <p>Tax:</p> <p>$0.80</p>
+          </div>
+          <div className="word-separator">
+            <p>Total:</p> <p>$8.80</p>
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }
 export default App;
