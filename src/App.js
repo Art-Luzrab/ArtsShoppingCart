@@ -57,21 +57,23 @@ function App() {
 
   function handleAddToCart(grocery) {
     const existingGrocery = cart.find((item) => item.id === grocery.id);
+
     if (existingGrocery) {
       setCart((currCart) =>
-        currCart.id === grocery.id
-          ? {
-              ...currCart,
-              amountOrdered: currCart.amountOrdered + grocery.amountOrdered,
-            }
-          : currCart
+        currCart.map((item) =>
+          item.id === grocery.id
+            ? {
+                ...item,
+                amountOrdered: item.amountOrdered + grocery.amountOrdered,
+              }
+            : item
+        )
       );
     } else {
       setCart((currCart) => [...currCart, grocery]);
     }
     // setCart((currCart) => {
     //   const existingGrocery = cart.find((item) => item.id === grocery.id);
-
     //   if (existingGrocery) {
     //     currCart.map((item) =>
     //       item.id === grocery.id
