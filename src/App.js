@@ -43,7 +43,7 @@ const market = [
     name: "Eggs",
     price: 4,
     category: "Protein",
-    inStock: false,
+    inStock: true,
     photo: eggs,
     amountOrdered: 0,
     emoji: "🥚",
@@ -115,19 +115,18 @@ function App() {
 }
 
 function GroceryStore({ handleAddToCart, cart, setCart }) {
-  const updateInventory = market
-    .map((grocery) => ({
-      ...grocery,
-      inventory: Math.floor(Math.random() * 11),
-    }))
-    .map((grocery) =>
-      grocery.inventory === 0 ? { ...grocery, inStock: false } : grocery
-    );
+  const [newGroceries, setNewGroceries] = useState(
+    market
+      .map((grocery) => ({
+        ...grocery,
+        inventory: Math.floor(Math.random() * 11),
+      }))
+      .map((grocery) =>
+        grocery.inventory === 0 ? { ...grocery, inStock: false } : grocery
+      )
+  );
 
-  console.log(updateInventory);
-  console.log(updateInventory.map((i) => i.inventory));
-
-  const groceries = updateInventory.map((grocery) => (
+  const groceries = newGroceries.map((grocery) => (
     <Grocery
       id={grocery.id}
       name={grocery.name}
