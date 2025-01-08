@@ -13,6 +13,7 @@ const market = [
     inStock: true,
     photo: tomato,
     amountOrdered: 0,
+    emoji: "🍅",
   },
   {
     id: 2,
@@ -22,6 +23,7 @@ const market = [
     inStock: true,
     photo: apple,
     amountOrdered: 0,
+    emoji: "🍎",
   },
   {
     id: 3,
@@ -31,6 +33,7 @@ const market = [
     inStock: true,
     photo: bread,
     amountOrdered: 0,
+    emoji: "🍞",
   },
   {
     id: 4,
@@ -40,6 +43,7 @@ const market = [
     inStock: false,
     photo: eggs,
     amountOrdered: 0,
+    emoji: "🥚",
   },
   {
     id: 5,
@@ -49,6 +53,7 @@ const market = [
     inStock: true,
     photo: milk,
     amountOrdered: 0,
+    emoji: "🥛",
   },
 ];
 
@@ -115,6 +120,7 @@ function GroceryStore({ handleAddToCart, cart, setCart }) {
       photo={item.photo}
       key={item.id}
       amountOrdered={item.amountOrdered}
+      emoji={item.emoji}
       handleAddToCart={handleAddToCart}
       cart={cart}
       setCart={setCart}
@@ -144,6 +150,7 @@ function Grocery({
   handleAddToCart,
   cart,
   setCart,
+  emoji,
 }) {
   const [quantity, setQuantity] = useState(0);
   console.log(quantity);
@@ -155,7 +162,8 @@ function Grocery({
     name,
     price,
     category,
-    amountOrdered: quantity, // Include the selected quantity
+    amountOrdered: quantity,
+    emoji,
   };
 
   return (
@@ -191,7 +199,7 @@ function Cart({ cart, DeleteItem }) {
         <ul className="ul-cart-items">
           {cart.map((grocery) => (
             <li className="word-separator cart-item" key={grocery.id}>
-              <p>{`${grocery.name} (${grocery.amountOrdered})`}</p>
+              <p>{`${grocery.emoji} (${grocery.amountOrdered})`}</p>
               <p>{`$${(grocery.price * grocery.amountOrdered).toFixed(2)}`}</p>
               <button onClick={() => DeleteItem(grocery.id)}>❌</button>
             </li>
