@@ -89,6 +89,9 @@ function App() {
     // });
   }
 
+  function handleDeleteItem(id) {
+    setCart((currCart) => currCart.filter((item) => item.id !== id));
+  }
   return (
     <div className="App">
       <GroceryStore
@@ -96,7 +99,7 @@ function App() {
         cart={cart}
         setCart={setCart}
       />
-      <Cart cart={cart} />
+      <Cart cart={cart} DeleteItem={handleDeleteItem} />
     </div>
   );
 }
@@ -171,7 +174,7 @@ function Grocery({
   );
 }
 
-function Cart({ cart }) {
+function Cart({ cart, DeleteItem }) {
   const subTotal = cart.reduce((acc, curr) => {
     return Number(acc + curr.price * curr.amountOrdered);
   }, 0);
@@ -190,6 +193,7 @@ function Cart({ cart }) {
             <li className="word-separator cart-item" key={grocery.id}>
               <p>{`${grocery.name} (${grocery.amountOrdered})`}</p>
               <p>{`$${(grocery.price * grocery.amountOrdered).toFixed(2)}`}</p>
+              <button onClick={() => DeleteItem(grocery.id)}>❌</button>
             </li>
           ))}
 
