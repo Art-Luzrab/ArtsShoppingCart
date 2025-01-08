@@ -164,6 +164,7 @@ function Grocery({
     category,
     amountOrdered: quantity,
     emoji,
+    inStock,
   };
 
   return (
@@ -178,8 +179,14 @@ function Grocery({
         onChange={(e) =>
           e.target.value <= 0 ? null : setQuantity(Number(e.target.value))
         }
+        disabled={inStock ? false : true}
       />
-      <button onClick={() => handleAddToCart(grocery)}>Add To Cart</button>
+      <button
+        onClick={() => handleAddToCart(grocery)}
+        disabled={inStock ? false : true}
+      >
+        Add To Cart
+      </button>
     </div>
   );
 }
@@ -201,7 +208,7 @@ function Cart({ cart, DeleteItem }) {
         <ul className="ul-cart-items">
           {cart.map((grocery) => (
             <li className="word-separator cart-item" key={grocery.id}>
-              <p>{`${grocery.emoji} (${grocery.amountOrdered})`}</p>
+              <p>{`${grocery.emoji} (x${grocery.amountOrdered})`}</p>
               <p>{`$${(grocery.price * grocery.amountOrdered).toFixed(2)}`}</p>
               <button onClick={() => DeleteItem(grocery.id)}>❌</button>
             </li>
