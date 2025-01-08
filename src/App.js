@@ -115,10 +115,15 @@ function App() {
 }
 
 function GroceryStore({ handleAddToCart, cart, setCart }) {
-  const updateInventory = market.map((grocery) => ({
-    ...grocery,
-    inventory: Math.floor(Math.random() * 11),
-  }));
+  const updateInventory = market
+    .map((grocery) => ({
+      ...grocery,
+      inventory: Math.floor(Math.random() * 11),
+    }))
+    .map((grocery) =>
+      grocery.inventory === 0 ? { ...grocery, inStock: false } : grocery
+    );
+
   console.log(updateInventory);
   console.log(updateInventory.map((i) => i.inventory));
 
@@ -160,6 +165,7 @@ function Grocery({
   inStock,
   photo,
   amountOrdered,
+  inventory,
   handleAddToCart,
   cart,
   setCart,
@@ -173,9 +179,14 @@ function Grocery({
     price,
     category,
     amountOrdered: quantity,
+    inventory,
     emoji,
     inStock,
   };
+
+  console.log("HERE", grocery.inventory);
+
+  // grocery.inventory === 0 ? inStock === false : true;
 
   return (
     <div className="grocery">
@@ -183,6 +194,7 @@ function Grocery({
       <p>{name}</p>
       <p>${price}</p>
       <p>{inStock ? "In Stock" : "Out of Stock"}</p>
+      <p>{inventory}</p>
       <input
         type="number"
         value={quantity}
