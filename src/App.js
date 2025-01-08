@@ -115,17 +115,25 @@ function App() {
 }
 
 function GroceryStore({ handleAddToCart, cart, setCart }) {
-  const groceries = market.map((item) => (
+  const updateInventory = market.map((grocery) => ({
+    ...grocery,
+    inventory: Math.floor(Math.random() * 11),
+  }));
+  console.log(updateInventory);
+  console.log(updateInventory.map((i) => i.inventory));
+
+  const groceries = updateInventory.map((grocery) => (
     <Grocery
-      id={item.id}
-      name={item.name}
-      price={item.price}
-      category={item.category}
-      inStock={item.inStock}
-      photo={item.photo}
-      key={item.id}
-      amountOrdered={item.amountOrdered}
-      emoji={item.emoji}
+      id={grocery.id}
+      name={grocery.name}
+      price={grocery.price}
+      category={grocery.category}
+      inStock={grocery.inStock}
+      photo={grocery.photo}
+      key={grocery.id}
+      amountOrdered={grocery.amountOrdered}
+      inventory={grocery.inventory}
+      emoji={grocery.emoji}
       handleAddToCart={handleAddToCart}
       cart={cart}
       setCart={setCart}
@@ -158,9 +166,6 @@ function Grocery({
   emoji,
 }) {
   const [quantity, setQuantity] = useState(0);
-  console.log(quantity);
-  console.log("SETCART", setCart);
-  console.log("CART", cart);
 
   const grocery = {
     id,
