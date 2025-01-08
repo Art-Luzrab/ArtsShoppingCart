@@ -175,7 +175,11 @@ function Grocery({
       <input
         type="number"
         value={quantity}
-        onChange={(e) => setQuantity(Number(e.target.value))}
+        onChange={(e) =>
+          e.target.value <= 0
+            ? console.log("Add One or More to Cart")
+            : setQuantity(Number(e.target.value))
+        }
       />
       <button onClick={() => handleAddToCart(grocery)}>Add To Cart</button>
     </div>
