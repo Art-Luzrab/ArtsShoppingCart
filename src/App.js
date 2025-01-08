@@ -14,6 +14,7 @@ const market = [
     photo: tomato,
     amountOrdered: 0,
     emoji: "🍅",
+    inventory: 0,
   },
   {
     id: 2,
@@ -24,6 +25,7 @@ const market = [
     photo: apple,
     amountOrdered: 0,
     emoji: "🍎",
+    inventory: 0,
   },
   {
     id: 3,
@@ -34,6 +36,7 @@ const market = [
     photo: bread,
     amountOrdered: 0,
     emoji: "🍞",
+    inventory: 0,
   },
   {
     id: 4,
@@ -44,6 +47,7 @@ const market = [
     photo: eggs,
     amountOrdered: 0,
     emoji: "🥚",
+    inventory: 0,
   },
   {
     id: 5,
@@ -54,6 +58,7 @@ const market = [
     photo: milk,
     amountOrdered: 0,
     emoji: "🥛",
+    inventory: 0,
   },
 ];
 
