@@ -96,7 +96,11 @@ function App() {
     setNewGroceries(
       newGroceries.map((item) =>
         item.id === grocery.id
-          ? { ...item, inventory: item.inventory - grocery.amountOrdered }
+          ? {
+              ...item,
+              inventory: item.inventory - grocery.amountOrdered,
+              inStock: item.inventory === 0,
+            }
           : item
       )
     );
