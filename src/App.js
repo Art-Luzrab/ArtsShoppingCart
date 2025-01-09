@@ -64,6 +64,16 @@ const market = [
 
 function App() {
   const [cart, setCart] = useState([]);
+  const [newGroceries, setNewGroceries] = useState(
+    market
+      .map((grocery) => ({
+        ...grocery,
+        inventory: Math.floor(Math.random() * 11),
+      }))
+      .map((grocery) =>
+        grocery.inventory === 0 ? { ...grocery, inStock: false } : grocery
+      )
+  );
 
   function handleAddToCart(grocery) {
     const existingGrocery = cart.find((item) => item.id === grocery.id);
@@ -82,6 +92,14 @@ function App() {
     } else {
       setCart((currCart) => [...currCart, grocery]);
     }
+
+    setNewGroceries(
+      newGroceries.map((item) =>
+        item.id === grocery.id
+          ? { ...item, inventory: item.inventory - grocery.amountOrdered }
+          : item
+      )
+    );
   }
 
   function handleDeleteItem(id) {
@@ -93,24 +111,21 @@ function App() {
         handleAddToCart={handleAddToCart}
         cart={cart}
         setCart={setCart}
+        newGroceries={newGroceries}
+        setNewGroceries={setNewGroceries}
       />
       <Cart cart={cart} DeleteItem={handleDeleteItem} />
     </div>
   );
 }
 
-function GroceryStore({ handleAddToCart, cart, setCart }) {
-  const [newGroceries, setNewGroceries] = useState(
-    market
-      .map((grocery) => ({
-        ...grocery,
-        inventory: Math.floor(Math.random() * 11),
-      }))
-      .map((grocery) =>
-        grocery.inventory === 0 ? { ...grocery, inStock: false } : grocery
-      )
-  );
-
+function GroceryStore({
+  handleAddToCart,
+  cart,
+  setCart,
+  newGroceries,
+  setNewGroceries,
+}) {
   const groceries = newGroceries.map((grocery) => (
     <Grocery
       id={grocery.id}
@@ -126,6 +141,7 @@ function GroceryStore({ handleAddToCart, cart, setCart }) {
       handleAddToCart={handleAddToCart}
       cart={cart}
       setCart={setCart}
+      setNewGroceries={setNewGroceries}
     />
   ));
 
@@ -150,10 +166,11 @@ function Grocery({
   photo,
   amountOrdered,
   inventory,
+  emoji,
   handleAddToCart,
   cart,
   setCart,
-  emoji,
+  setNewGroceries,
 }) {
   const [quantity, setQuantity] = useState(0);
 
@@ -168,9 +185,15 @@ function Grocery({
     inStock,
   };
 
-  console.log("HERE", grocery.inventory);
+  // console.log("HERE", grocery.inventory);
 
-  // grocery.inventory === 0 ? inStock === false : true;
+  // setNewGroceries(
+  //   cart.map((item) =>
+  //     item.id === grocery.id
+  //       ? { ...grocery, inventory: grocery.inventory - item.amountOrdered }
+  //       : grocery
+  //   )
+  // );
 
   return (
     <div className="grocery">
