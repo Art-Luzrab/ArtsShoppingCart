@@ -64,6 +64,7 @@ const market = [
 
 function App() {
   const [cart, setCart] = useState([]);
+  const [quantity, setQuantity] = useState(0);
 
   function handleAddToCart(grocery) {
     const existingGrocery = cart.find((item) => item.id === grocery.id);
@@ -108,13 +109,21 @@ function App() {
         handleAddToCart={handleAddToCart}
         cart={cart}
         setCart={setCart}
+        quantity={quantity}
+        setQuantity={setQuantity}
       />
       <Cart cart={cart} DeleteItem={handleDeleteItem} />
     </div>
   );
 }
 
-function GroceryStore({ handleAddToCart, cart, setCart }) {
+function GroceryStore({
+  handleAddToCart,
+  cart,
+  setCart,
+  quantity,
+  setQuantity,
+}) {
   const [newGroceries, setNewGroceries] = useState(
     market
       .map((grocery) => ({
@@ -141,6 +150,8 @@ function GroceryStore({ handleAddToCart, cart, setCart }) {
       handleAddToCart={handleAddToCart}
       cart={cart}
       setCart={setCart}
+      quantity={quantity}
+      setQuantity={setQuantity}
     />
   ));
 
@@ -169,9 +180,9 @@ function Grocery({
   cart,
   setCart,
   emoji,
+  quantity,
+  setQuantity,
 }) {
-  const [quantity, setQuantity] = useState(0);
-
   const grocery = {
     id,
     name,
