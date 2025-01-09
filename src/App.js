@@ -82,21 +82,6 @@ function App() {
     } else {
       setCart((currCart) => [...currCart, grocery]);
     }
-    // setCart((currCart) => {
-    //   const existingGrocery = cart.find((item) => item.id === grocery.id);
-    //   if (existingGrocery) {
-    //     currCart.map((item) =>
-    //       item.id === grocery.id
-    //         ? {
-    //             ...item,
-    //             amountOrdered: item.amountOrdered + grocery.amountOrdered,
-    //           }
-    //         : item
-    //     );
-    //   } else {
-    //     return [...currCart, grocery];
-    //   }
-    // });
   }
 
   function handleDeleteItem(id) {
