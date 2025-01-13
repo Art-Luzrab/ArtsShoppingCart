@@ -94,15 +94,20 @@ function App() {
     }
 
     setNewGroceries(
-      newGroceries.map((item) =>
-        item.id === grocery.id
-          ? {
-              ...item,
-              inventory: item.inventory - grocery.amountOrdered,
-              inStock: item.inventory === 0 ? false : true,
-            }
-          : item
-      )
+      newGroceries
+        .map((item) =>
+          item.id === grocery.id
+            ? {
+                ...item,
+                inventory: item.inventory - grocery.amountOrdered,
+              }
+            : item
+        )
+        .map((item) =>
+          item.id === grocery.id
+            ? { ...item, inStock: item.inventory === 0 ? false : true }
+            : item
+        )
     );
   }
 
@@ -210,7 +215,7 @@ function Grocery({
         type="number"
         value={quantity}
         onChange={(e) =>
-          e.target.value <= 0 || e.target.value > grocery.inventory
+          e.target.value < 0 || e.target.value > grocery.inventory
             ? null
             : setQuantity(Number(e.target.value))
         }
@@ -241,13 +246,17 @@ function Cart({ cart, DeleteItem }) {
           <p>Item</p> <p>Price</p>
         </div>
         <ul className="ul-cart-items">
-          {cart.map((grocery) => (
-            <li className="word-separator cart-item" key={grocery.id}>
-              <p>{`${grocery.emoji} (x${grocery.amountOrdered})`}</p>
-              <p>{`$${(grocery.price * grocery.amountOrdered).toFixed(2)}`}</p>
-              <button onClick={() => DeleteItem(grocery.id)}>❌</button>
-            </li>
-          ))}
+          {cart.map((grocery) =>
+            grocery.amountOrdered <= 0 ? null : (
+              <li className="word-separator cart-item" key={grocery.id}>
+                <p>{`${grocery.emoji} (x${grocery.amountOrdered})`}</p>
+                <p>{`$${(grocery.price * grocery.amountOrdered).toFixed(
+                  2
+                )}`}</p>
+                <button onClick={() => DeleteItem(grocery.id)}>❌</button>
+              </li>
+            )
+          )}
 
           {/* <li className="word-separator cart-item">
           <p>Bread (1)</p> <p>$2</p>
