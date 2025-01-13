@@ -68,7 +68,7 @@ function App() {
     market
       .map((grocery) => ({
         ...grocery,
-        inventory: Math.floor(Math.random() * 11),
+        inventory: Math.floor(Math.random() * 101),
       }))
       .map((grocery) =>
         grocery.inventory === 0 ? { ...grocery, inStock: false } : grocery
