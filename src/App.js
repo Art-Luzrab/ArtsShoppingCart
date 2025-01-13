@@ -112,6 +112,23 @@ function App() {
   }
 
   function handleDeleteItem(id) {
+    // target deleted item
+    const deletedItem = cart.find((item) => item.id === id);
+
+    // Update Grocery' stock
+    setNewGroceries((currentGroceries) =>
+      currentGroceries.map((grocery) =>
+        grocery.id === id
+          ? {
+              ...grocery,
+              inventory: grocery.inventory + deletedItem.amountOrdered,
+              inStock: grocery.inventory + deletedItem.amountOrdered > 0,
+            }
+          : grocery
+      )
+    );
+
+    // Remove Item from cart
     setCart((currCart) => currCart.filter((item) => item.id !== id));
   }
   return (
