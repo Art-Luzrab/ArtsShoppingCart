@@ -210,7 +210,9 @@ function Grocery({
         type="number"
         value={quantity}
         onChange={(e) =>
-          e.target.value <= 0 ? null : setQuantity(Number(e.target.value))
+          e.target.value < 0 || e.target.value > grocery.inventory
+            ? null
+            : setQuantity(Number(e.target.value))
         }
         disabled={inStock ? false : true}
       />
