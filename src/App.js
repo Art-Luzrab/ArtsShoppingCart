@@ -239,7 +239,10 @@ function Grocery({
         disabled={inStock ? false : true}
       />
       <button
-        onClick={() => handleAddToCart(grocery)}
+        onClick={() => {
+          handleAddToCart(grocery);
+          setQuantity(0);
+        }}
         disabled={inStock ? false : true}
       >
         Add To Cart
