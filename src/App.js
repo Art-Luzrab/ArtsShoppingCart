@@ -99,7 +99,7 @@ function App() {
           ? {
               ...item,
               inventory: item.inventory - grocery.amountOrdered,
-              inStock: item.inventory === 0,
+              inStock: item.inventory === 0 ? false : true,
             }
           : item
       )
@@ -210,7 +210,7 @@ function Grocery({
         type="number"
         value={quantity}
         onChange={(e) =>
-          e.target.value < 0 || e.target.value > grocery.inventory
+          e.target.value <= 0 || e.target.value > grocery.inventory
             ? null
             : setQuantity(Number(e.target.value))
         }
