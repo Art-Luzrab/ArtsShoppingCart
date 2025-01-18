@@ -1,5 +1,5 @@
 import { useState } from "react";
-import apple from "./images/apple.webp";
+import apple from "./images/Apple.webp";
 import bread from "./images/bread.jpg";
 import eggs from "./images/eggs.webp";
 import milk from "./images/milk.webp";
@@ -190,13 +190,9 @@ function Grocery({
   category,
   inStock,
   photo,
-  amountOrdered,
   inventory,
   emoji,
   handleAddToCart,
-  cart,
-  setCart,
-  setNewGroceries,
 }) {
   const [quantity, setQuantity] = useState(0);
 
@@ -210,16 +206,6 @@ function Grocery({
     emoji,
     inStock,
   };
-
-  // console.log("HERE", grocery.inventory);
-
-  // setNewGroceries(
-  //   cart.map((item) =>
-  //     item.id === grocery.id
-  //       ? { ...grocery, inventory: grocery.inventory - item.amountOrdered }
-  //       : grocery
-  //   )
-  // );
 
   return (
     <div className="grocery">
@@ -277,13 +263,6 @@ function Cart({ cart, DeleteItem }) {
               </li>
             )
           )}
-
-          {/* <li className="word-separator cart-item">
-          <p>Bread (1)</p> <p>$2</p>
-        </li>
-        <li className="word-separator cart-item">
-          <p>Milk (2)</p> <p>$6</p>
-        </li> */}
         </ul>
 
         <div className="total">
