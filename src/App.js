@@ -1,96 +1,18 @@
 import { useState } from "react";
-import { market } from "./market";
+import { useCart } from "./contexts/CartContext";
 
 function App() {
-  const [cart, setCart] = useState([]);
-  const [newGroceries, setNewGroceries] = useState(
-    market
-      .map((grocery) => ({
-        ...grocery,
-        inventory: Math.floor(Math.random() * 101),
-      }))
-      .map((grocery) =>
-        grocery.inventory === 0 ? { ...grocery, inStock: false } : grocery
-      )
-  );
-
-  function handleAddToCart(grocery) {
-    const existingGrocery = cart.find((item) => item.id === grocery.id);
-
-    if (existingGrocery) {
-      setCart((currCart) =>
-        currCart.map((item) =>
-          item.id === grocery.id
-            ? {
-                ...item,
-                amountOrdered: item.amountOrdered + grocery.amountOrdered,
-              }
-            : item
-        )
-      );
-    } else {
-      setCart((currCart) => [...currCart, grocery]);
-    }
-
-    setNewGroceries(
-      newGroceries
-        .map((item) =>
-          item.id === grocery.id
-            ? {
-                ...item,
-                inventory: item.inventory - grocery.amountOrdered,
-              }
-            : item
-        )
-        .map((item) =>
-          item.id === grocery.id
-            ? { ...item, inStock: item.inventory === 0 ? false : true }
-            : item
-        )
-    );
-  }
-
-  function handleDeleteItem(id) {
-    // target deleted item
-    const deletedItem = cart.find((item) => item.id === id);
-
-    // Update Grocery' stock
-    setNewGroceries((currentGroceries) =>
-      currentGroceries.map((grocery) =>
-        grocery.id === id
-          ? {
-              ...grocery,
-              inventory: grocery.inventory + deletedItem.amountOrdered,
-              inStock: grocery.inventory + deletedItem.amountOrdered > 0,
-            }
-          : grocery
-      )
-    );
-
-    // Remove Item from cart
-    setCart((currCart) => currCart.filter((item) => item.id !== id));
-  }
   return (
     <div className="App">
-      <GroceryStore
-        handleAddToCart={handleAddToCart}
-        cart={cart}
-        setCart={setCart}
-        newGroceries={newGroceries}
-        setNewGroceries={setNewGroceries}
-      />
-      <Cart cart={cart} DeleteItem={handleDeleteItem} />
+      <GroceryStore />
+      <Cart />
     </div>
   );
 }
 
-function GroceryStore({
-  handleAddToCart,
-  cart,
-  setCart,
-  newGroceries,
-  setNewGroceries,
-}) {
+function GroceryStore() {
+  const { handleAddToCart, cart, setCart, newGroceries, setNewGroceries } =
+    useCart();
   const groceries = newGroceries.map((grocery) => (
     <Grocery
       id={grocery.id}
@@ -176,7 +98,8 @@ function Grocery({
   );
 }
 
-function Cart({ cart, DeleteItem }) {
+function Cart() {
+  const { cart, handleDeleteItem: DeleteItem } = useCart();
   const subTotal = cart.reduce((acc, curr) => {
     return Number(acc + curr.price * curr.amountOrdered);
   }, 0);
