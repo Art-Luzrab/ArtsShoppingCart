@@ -1,4 +1,4 @@
-import { useCart } from "./contexts/CartContext";
+import { useCart } from "../contexts/CartContext";
 
 export default function Cart() {
   const { cart, handleDeleteItem: DeleteItem } = useCart();

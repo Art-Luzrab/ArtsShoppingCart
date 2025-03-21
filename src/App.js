@@ -1,5 +1,5 @@
-import GroceryStore from "./GroceryStore";
-import Cart from "./Cart";
+import GroceryStore from "./components/GroceryStore";
+import Cart from "./components/Cart";
 
 function App() {
   return (

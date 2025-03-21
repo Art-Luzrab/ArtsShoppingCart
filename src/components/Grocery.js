@@ -1,5 +1,5 @@
 import { useState } from "react";
-
+import { useCart } from "../contexts/CartContext";
 export default function Grocery({
   id,
   name,
@@ -9,9 +9,9 @@ export default function Grocery({
   photo,
   inventory,
   emoji,
-  handleAddToCart,
 }) {
   const [quantity, setQuantity] = useState(0);
+  const { handleAddToCart } = useCart();
 
   const grocery = {
     id,

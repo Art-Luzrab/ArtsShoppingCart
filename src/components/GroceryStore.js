@@ -1,6 +1,5 @@
-import { useCart } from "./contexts/CartContext";
+import { useCart } from "../contexts/CartContext";
 import Grocery from "./Grocery";
-
 export default function GroceryStore() {
   const { newGroceries } = useCart();
   const groceries = newGroceries.map((grocery) => (

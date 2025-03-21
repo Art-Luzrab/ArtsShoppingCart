@@ -1,5 +1,5 @@
 import { createContext, useContext, useState } from "react";
-import { market } from "../market";
+import { market } from "../data/market";
 
 const CartContext = createContext();
 
