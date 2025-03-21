@@ -1,5 +1,5 @@
 import { useState } from "react";
-import apple from "./images/apple.webp";
+import apple from "./images/Apple.webp";
 import bread from "./images/bread.jpg";
 import eggs from "./images/eggs.webp";
 import milk from "./images/milk.webp";
